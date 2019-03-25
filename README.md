@@ -8,5 +8,7 @@ Instalar dependencias y arrancar el servicio.
 ```sh
 $ cd sepomex-backend
 $ npm i
+$ cd docker
+$ docker-compose up
 $ sails lift
 ```
