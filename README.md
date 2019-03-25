@@ -7,6 +7,7 @@ Instalar dependencias y arrancar el servicio.
 
 ### correr el sql dentro de la carpeta docker
 ```
+crear base de datos llamada sepomex en mysql
 sepomex.sql
 ```
 
