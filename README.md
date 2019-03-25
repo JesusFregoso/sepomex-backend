@@ -5,6 +5,11 @@
 
 Instalar dependencias y arrancar el servicio.
 
+### correr el sql dentro de la carpeta docker
+```
+sepomex.sql
+```
+
 ```sh
 $ cd sepomex-backend
 $ npm i
