@@ -135,3 +135,5 @@ coverage
 \.nyc_output/
 config/env/production\.js
 package-lock\.json
+docker/mysql
+

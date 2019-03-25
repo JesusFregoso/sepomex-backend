@@ -12,24 +12,15 @@ const _ = require('lodash');
 
 module.exports = function (data, config) {
   const response = _.assign({
-    code: _.get(config, 'code', 'E_FORBIDDEN'),
-    message: _.get(
+      code: _.get(config, 'code', 'E_FORBIDDEN'),
+      message: _.get(
         config,
         'message',
         'User not authorized to perform the operation'
-    ),
-    data: data || {}
-  },
+      ),
+      data: data || {}
+    },
     _.get(config, 'root', {})
   );
-  sails.helpers.elasticKibana.createRegister
-    .with({
-      id: callId,
-      type: 'info',
-      file: __filename,
-      title: response.message,
-      data: data || {}
-    })
-    .then();
   return this.res.status(403).json(response);
 };

@@ -9,7 +9,6 @@
  * https://sailsjs.com/config/bootstrap
  */
 const redis = require('redis');
-const elasticSearch = require('elasticsearch');
 module.exports.bootstrap = async function (done) {
   // By convention, this is a good place to set up fake data during development.
   //
@@ -29,12 +28,8 @@ module.exports.bootstrap = async function (done) {
   // Don't forget to trigger `done()` when this bootstrap function's logic is finished.
   // (otherwise your server will never lift, since it's waiting on the bootstrap)
   global.custom = sails.config.custom;
-  global.elasticSearchClient = new elasticSearch.Client(
-    custom.elasticSearchKibana.config
-  );
-  // Use default port: 6379 and host: 127.0.0.1
-  // If you need some params: redis.createClient(port, host);
-  global.redisClient = redis.createClient();
+
+  global.redisClient = redis.createClient(6379, '0.0.0.0');
   global.redisClient.on('connect', () => {
     console.log('Redis successfully connected');
   });

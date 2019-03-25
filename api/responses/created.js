@@ -13,24 +13,15 @@ const _ = require('lodash');
 
 module.exports = function (data, config) {
   const response = _.assign({
-    code: _.get(config, 'code', 'CREATED'),
-    message: _.get(
+      code: _.get(config, 'code', 'CREATED'),
+      message: _.get(
         config,
         'message',
         'The request has been fulfilled and resulted in a new resource being created'
-    ),
-    data: data || {}
-  },
+      ),
+      data: data || {}
+    },
     _.get(config, 'root', {})
   );
-  sails.helpers.elasticKibana.createRegister
-    .with({
-      id: callId,
-      type: 'info',
-      file: __filename,
-      title: 'End Action on Users',
-      data: data || {}
-    })
-    .then();
   return this.res.status(201).json(response);
 };

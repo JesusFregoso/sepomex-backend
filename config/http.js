@@ -10,9 +10,6 @@
  */
 
 var Raven = require('raven');
-Raven.config(
-  'http://dec9fc1f95cf477887f0c90319b9293a:afc95862f51249cb83e280e395014d2b@sentry.kichink.io/14'
-).install();
 
 module.exports.http = {
   /****************************************************************************
@@ -25,9 +22,6 @@ module.exports.http = {
    ****************************************************************************/
 
   middleware: {
-    requestHandler: Raven.requestHandler(),
-    errorHandler: Raven.errorHandler(),
-
     /***************************************************************************
      *                                                                          *
      * The order in which middleware should be run for HTTP requests.           *
@@ -36,7 +30,6 @@ module.exports.http = {
      ***************************************************************************/
 
     order: [
-      'requestHandler',
       'requestLogger',
       'register',
       'keepAlive',
@@ -44,28 +37,11 @@ module.exports.http = {
       'session',
       'bodyParser',
       'compress',
-      'router',
-      'errorHandler'
+      'router'
     ],
     register: (function () {
       return async function (req, res, next) {
-        // Create logs register
-        // prettier-ignore
         req.headers.id = req.headers.id || 'UNKNOWN-ID';
-        sails.helpers.elasticKibana.createRegister
-          .with({
-            id: req.headers.id,
-            title: 'Sepomex Entrance',
-            type: 'register',
-            file: __filename,
-            data: {
-              fromApp: req.headers.app,
-              fromVersion: req.headers.version,
-              call: req.path,
-              method: req.method
-            }
-          })
-          .then();
         return next();
       };
     })(),

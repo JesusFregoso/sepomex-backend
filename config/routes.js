@@ -28,7 +28,14 @@ module.exports.routes = {
   /**************
    * SEPOMEX
    **************/
-  'GET /sepomex/:d_codigo': {
+  'GET /sepomex/:codigo': {
     action: 'sepomex/find'
+  },
+
+  /**************
+   * LOGIN
+   **************/
+  'POST /auth': {
+    action: 'auth/index'
   }
 };

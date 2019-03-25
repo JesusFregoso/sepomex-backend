@@ -13,20 +13,16 @@ module.exports = {
         autoIncrement: true
       }
     },
-    /* eslint-disable-next-line */
-    d_codigo: {
+    codigo: {
       type: 'number'
     },
-    /* eslint-disable-next-line */
-    d_estado: {
+    estado: {
       type: 'string'
     },
-    /* eslint-disable-next-line */
-    D_mnpio: {
+    municipio: {
       type: 'string'
     },
-    /* eslint-disable-next-line */
-    d_asenta: {
+    asentamiento: {
       type: 'string'
     },
   },

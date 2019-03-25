@@ -6,7 +6,7 @@
 
 module.exports = async (req, res) => {
   let zipCodeData;
-  redisClient.get(`${req.params.d_codigo}`, async (err, value) => {
+  redisClient.get(`${req.params.codigo}`, async (err, value) => {
     if (err) {
       return res.badRequest();
     } else if (value) {
@@ -14,16 +14,16 @@ module.exports = async (req, res) => {
     } else {
       const zipCode = await Sepomex.find({
         where: {
-          d_codigo: req.params.d_codigo
+          codigo: req.params.codigo
         },
         sort: [{
-            d_estado: 'ASC'
+            estado: 'ASC'
           },
           {
-            D_mnpio: 'ASC'
+            municipio: 'ASC'
           },
           {
-            d_asenta: 'ASC'
+            asentamiento: 'ASC'
           }
         ]
       });
@@ -42,20 +42,20 @@ module.exports = async (req, res) => {
       zipCode.forEach(item => {
         if (
           !zipCodeData.states.length ||
-          item.d_estado !== zipCodeData.states[zipCodeData.states.length - 1]
+          item.estado !== zipCodeData.states[zipCodeData.states.length - 1]
         ) {
-          zipCodeData.states.push(item.d_estado);
+          zipCodeData.states.push(item.estado);
         }
         if (
           !zipCodeData.cities.length ||
-          item.D_mnpio !== zipCodeData.cities[zipCodeData.cities.length - 1]
+          item.municipio !== zipCodeData.cities[zipCodeData.cities.length - 1]
         ) {
-          zipCodeData.cities.push(item.D_mnpio);
+          zipCodeData.cities.push(item.municipio);
         }
-        zipCodeData.zones.push(item.d_asenta);
+        zipCodeData.zones.push(item.asentamiento);
       });
 
-      redisClient.set(`${req.params.d_codigo}`, JSON.stringify(zipCodeData));
+      redisClient.set(`${req.params.codigo}`, JSON.stringify(zipCodeData));
     }
     return res.ok(zipCodeData);
   });

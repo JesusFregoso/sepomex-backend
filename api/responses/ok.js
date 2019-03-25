@@ -13,20 +13,11 @@ const _ = require('lodash');
 
 module.exports = function (data, config) {
   const response = _.assign({
-    code: _.get(config, 'code', 'OK'),
-    message: _.get(config, 'message', 'Operation is successfully executed'),
-    data: data || {}
-  },
+      code: _.get(config, 'code', 'OK'),
+      message: _.get(config, 'message', 'Operation is successfully executed'),
+      data: data || {}
+    },
     _.get(config, 'root', {})
   );
-  sails.helpers.elasticKibana.createRegister
-    .with({
-      id: callId,
-      type: 'info',
-      file: __filename,
-      title: 'End Action on Sepomex',
-      data: data || {}
-    })
-    .then();
   return this.res.status(200).json(response);
 };

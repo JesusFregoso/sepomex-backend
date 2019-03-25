@@ -1,0 +1,21 @@
+version: '2'
+
+services:
+
+  mysql:
+    image: mariadb:10.1.19
+    ports:
+      - 8083:3306
+    volumes:
+      - ./mysql:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: 123
+
+  redis-server: # the name of the redis service becomes the host name in my application
+    container_name: REDIS_SERVER
+    image: redis
+    ports:
+      - 6379
+    environment:
+      - REDIS_URL=redis://redis_db:6379
+      # rest of the environment definitions

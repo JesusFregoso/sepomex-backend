@@ -9,12 +9,14 @@
  */
 
 module.exports.policies = {
+  '*': ['isAuthorized'],
   PingController: {
-    '*': false,
-    index: true
+    '*': false //public access
   },
-  SepomexController: {
-    '*': false,
-    find: ['logPolicy', 'sepomex/find', 'logAction'],
+  UsersController: {
+    'create': true //public access
+  },
+  AuthController: {
+    'index': true // public access
   }
 };

@@ -31,15 +31,6 @@ module.exports = function (error) {
     message,
     root
   };
-  sails.helpers.elasticKibana.createRegister
-    .with({
-      id: callId,
-      type: 'info',
-      file: __filename,
-      title: message,
-      data: data || {}
-    })
-    .then();
   if (statusCode === 401) {
     return res.unauthorized(data, config);
   }

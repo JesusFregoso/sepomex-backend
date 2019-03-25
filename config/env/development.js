@@ -9,7 +9,6 @@
  */
 
 const mysql = require('sails-mysql');
-const staticsVariables = require('./staticsVariables.js');
 module.exports = {
   // Any configuration settings may be overridden below, whether it's built-in Sails
   // options or custom configuration specifically for your app (e.g. Stripe, Mailgun, etc.)
@@ -17,7 +16,7 @@ module.exports = {
   datastores: {
     default: {
       adapter: mysql,
-      url: 'mysql://root:root@localhost:4306/sepomex'
+      url: 'mysql://root:123@0.0.0.0:8083/sepomex'
     }
   },
 
@@ -58,15 +57,7 @@ module.exports = {
   },
 
   custom: {
-    elasticSearchKibana: {
-      index: 'register',
-      type: 'logRegister',
-      config: {
-        host: 'localhost:9200',
-        apiVersion: '6.2',
-        log: false
-      }
-    },
-    ...staticsVariables
+    version: 'v1.0.0',
+    app: 'SEPOMEX'
   }
 };
